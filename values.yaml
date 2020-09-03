@@ -13,8 +13,8 @@
 ##
 image:
   registry: docker.io
-  repository: bitnami/mysql
-  tag: 8.0.21-debian-10-r17
+  repository: madavi/mysql
+  tag: 1
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -100,8 +100,8 @@ db:
   ## ref: https://github.com/bitnami/bitnami-docker-mysql#creating-a-database-user-on-first-run
   ## Note that this user should be different from the MySQL replication user (replication.user)
   ##
-  user:
-  password:
+  user: admin 
+  password: admin
   ## Database to create
   ## ref: https://github.com/bitnami/bitnami-docker-mysql#creating-a-database-on-first-run
   ##
@@ -295,7 +295,7 @@ master:
   persistence:
     ## If true, use a Persistent Volume Claim, If false, use emptyDir
     ##
-    enabled: true
+    enabled: false
     mountPath: /bitnami/mysql
     ## Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
@@ -459,7 +459,7 @@ slave:
   persistence:
     ## If true, use a Persistent Volume Claim, If false, use emptyDir
     ##
-    enabled: true
+    enabled: false
     mountPath: /bitnami/mysql
     ## Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
@@ -549,7 +549,7 @@ metrics:
   ## MySQL Prometheus exporter service parameters
   ##
   service:
-    type: ClusterIP
+    type: NodePort
     port: 9104
     annotations:
       prometheus.io/scrape: "true"
