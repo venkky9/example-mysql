@@ -280,7 +280,7 @@ master:
     successThreshold: 1
     failureThreshold: 3
   readinessProbe:
-    enabled: true
+    enabled: false
     ## Initializing the database could take some time
     ##
     initialDelaySeconds: 30
