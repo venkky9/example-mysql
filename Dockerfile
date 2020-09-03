@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y lsb-release && \
 
 # Install packages
 RUN apt-get update && \
-  apt-get -yes install mysql-server pwgen supervisor && \
+  apt-get -y install mysql-server pwgen supervisor && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
