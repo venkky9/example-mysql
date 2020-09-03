@@ -2,15 +2,16 @@ FROM openjdk:7-jdk
 MAINTAINER Manuel de la Peña <manuel.delapenya@liferay.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV TOMCAT_MAJOR_VERSION=8
-ENV TOMCAT_VERSION=8.5.57
+ENV TOMCAT_MAJOR_VERSION=7
+ENV TOMCAT_VERSION=7.0.77
 ENV TOMCAT_HOME=/opt/apache-tomcat-$TOMCAT_VERSION
 
-# Prepare the installation of mysql-server and tomcat 7
+# Install mysql-server and tomcat 7
 RUN apt-get update && apt-get install -y lsb-release && \
-  wget https://repo.mysql.com/mysql80-community-release-sles12.rpm && \
+  wget https://dev.mysql.com/get/mysql-apt-config_0.8.4-1_all.deb && \
+  dpkg -i mysql-apt-config_0.8.4-1_all.deb && rm -f mysql-apt-config_0.8.4-1_all.deb && \
   mkdir -p $TOMCAT_HOME && cd /opt && \
-  wget https://mirrors.estointernet.in/apache/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz && \
+  wget http://mirrors.standaloneinstaller.com/apache/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz && \
   tar -xvf apache-tomcat-$TOMCAT_VERSION.tar.gz && rm -f apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 # Install packages
@@ -25,7 +26,6 @@ ADD start-mysqld.sh /start-mysqld.sh
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 ADD my.cnf /etc/mysql/conf.d/my.cnf
-RUN chmod 644 /etc/mysql/conf.d/my.cnf
 ADD supervisord-tomcat.conf /etc/supervisor/conf.d/supervisord-tomcat.conf
 ADD supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
