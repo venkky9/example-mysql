@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y lsb-release && \
   tar -xvf apache-tomcat-$TOMCAT_VERSION.tar.gz && rm -f apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 # Install packages
-RUN apt-get -y install pwgen python-setuptools curl git nano sudo unzip openssh-server openssl vim htop
-RUN apt-get --force-yes install mysql-server pwgen supervisor && \
-    apt-get clean && \
+RUN apt-get update && \
+  apt-get -yes install mysql-server pwgen supervisor && \
+  apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add image configuration and scripts
