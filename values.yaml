@@ -295,7 +295,7 @@ master:
   persistence:
     ## If true, use a Persistent Volume Claim, If false, use emptyDir
     ##
-    enabled: false
+    enabled: true
     mountPath: /bitnami/mysql
     ## Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
@@ -459,7 +459,7 @@ slave:
   persistence:
     ## If true, use a Persistent Volume Claim, If false, use emptyDir
     ##
-    enabled: false
+    enabled: true
     mountPath: /bitnami/mysql
     ## Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
