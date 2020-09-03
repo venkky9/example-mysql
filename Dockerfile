@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install -y lsb-release && \
 
 # Install packages
 RUN apt-get -y install pwgen python-setuptools curl git nano sudo unzip openssh-server openssl vim htop
-RUN apt-get -y install mysql-server-5.6 mysql-client-5.6 nginx
-RUN apt-get install -y supervisor && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get --force-yes install mysql-server pwgen supervisor && \
+    apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add image configuration and scripts
 ADD start-tomcat.sh /start-tomcat.sh
