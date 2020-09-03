@@ -15,10 +15,11 @@ RUN apt-get update && apt-get install -y lsb-release && \
   tar -xvf apache-tomcat-$TOMCAT_VERSION.tar.gz && rm -f apache-tomcat-$TOMCAT_VERSION.tar.gz
 
 # Install packages
-RUN apt-get update && \
-  apt-get --force-yes install mysql-server pwgen supervisor && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get -y install pwgen python-setuptools curl git nano sudo unzip openssh-server openssl vim htop
+RUN apt-get -y install php7.4-fpm php7.4-common php7.4-mysql php7.4-xml php7.4-xmlrpc php7.4-curl php7.4-gd php7.4-imagick php7.4-cli php7.4-dev php7.4-imap php7.4-mbstring php7.4-soap php7.4-zip php7.4-bcmath php7.4-memcache php7.4-mysql
+RUN apt-get -y install mysql-server-5.6 mysql-client-5.6 nginx
+RUN apt-get install -y supervisor && \
+    rm -rf /var/lib/apt/lists/*
 
 # Add image configuration and scripts
 ADD start-tomcat.sh /start-tomcat.sh
